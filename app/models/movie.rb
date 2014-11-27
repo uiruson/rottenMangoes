@@ -14,15 +14,8 @@ class Movie < ActiveRecord::Base
   scope :search_movie_by_title, ->(title) {where('title like ?', "%#{title}%")}
   scope :search_movie_by_director, ->(director) {where('director like ?', "%#{director}%")}
 
-  # scope :search_movie_by_all_categories, ->(title,director,runtime) do
-  #   if runtime == 1
-  #     where('title like "%#{title}%" AND director like "%#{director}%" AND runtime_in_minutes < 90')
-  #   elsif runtime == 2
-  #     where('title like "%#{title}%" AND director like "%#{director}%" AND runtime_in_minutes BETWEEN "90" AND "120"')
-  #   elsif runtime == 3
-  #     where('title like "%#{title}%" AND director like "%#{director}%" AND runtime_in_minutes > 120')
-  #   end
-  # end
+  scope :search_movie_by_runtime, ->(runtime) { where("runtime_in_minutes #{Movie.movie_by_runtime(runtime)}") }
+  scope :search_movie_by_all_categories, ->(title,director,runtime) { where("title like '%#{title}%' AND director like '%#{director}%' AND runtime_in_minutes #{ Movie.movie_by_runtime(runtime) }") }
 
   def review_average
     if reviews.size > 0
@@ -32,23 +25,13 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def self.search_movie_by_runtime(runtime)
+  def self.movie_by_runtime(runtime)
     if runtime == "1"
-     where('runtime_in_minutes < 90')
+      "< 90"
     elsif runtime == "2"
-      where('runtime_in_minutes BETWEEN "90" AND "120"')
+      "BETWEEN '90' AND '120'"
     elsif runtime == "3"
-      where('runtime_in_minutes > 120')
-    end
-  end
-
-  def self.search_movie_by_all_categories(title,director,runtime)
-    if runtime == "1"
-      where("title like '%#{title}%' AND director like '%#{director}%' AND runtime_in_minutes < 90")
-    elsif runtime == "2"
-      where("title like '%#{title}%' AND director like '%#{director}%' AND runtime_in_minutes BETWEEN '90' AND '120'")
-    elsif runtime == "3"
-      where("title like '%#{title}%' AND director like '%#{director}%' AND runtime_in_minutes > 120")
+      "> 120"
     end
   end
 
