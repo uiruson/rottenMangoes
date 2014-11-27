@@ -1,0 +1,43 @@
+<%= form_for [:admin, @admin_user] do |f| %>
+ <% if @admin_user.errors.any? %>
+  <div>
+    <%= pluralize(@admin_user.errors.count, "error")%> prevented this from movie being submitted:
+    <ul>
+      <% @admin_user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+ <% end %>
+   <div>
+    <%= f.label "email" %><br/>
+    <%= f.text_field "email" %><br/>
+  </div>
+
+  <div>
+    <%= f.label "firstname" %><br/>
+    <%= f.text_field "firstname" %><br/>
+  </div>
+
+  <div>
+    <%= f.label "lastname" %> <br/>
+    <%= f.text_field "lastname" %><br/>
+  </div>
+
+  <div>
+    <%= f.label "password" %><br/>
+    <%= f.password_field "password" %><br/>
+  </div>
+
+  <div>
+    <%= f.label "password_confirmation" %><br/>
+    <%= f.password_field "password_confirmation" %><br/>
+  </div>
+
+  <div>
+   Admin? : <%= f.check_box :admin %>
+  </div>
+
+  <div><%= f.submit "Submit" %></div>
+
+<% end %>
