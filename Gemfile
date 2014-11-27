@@ -37,6 +37,11 @@ gem 'carrierwave'
 #pagination
 gem 'kaminari'
 
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
+gem 'simple_form'
+gem 'bootstrap_form'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
