@@ -12,7 +12,11 @@ class Movie < ActiveRecord::Base
   mount_uploader :poster_image_url, AvatarUploader
 
   def review_average
-    reviews.sum(:rating_out_of_ten)/reviews.size if reviews.size > 0
+    if reviews.size > 0
+      reviews.sum(:rating_out_of_ten)/reviews.size 
+    else
+      return 0
+    end
   end
 
   protected
