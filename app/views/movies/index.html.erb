@@ -3,13 +3,22 @@
     <h1>Rotten Mangoes</h1>
     <button type="button" class="btn btn-info"><%= link_to "Submit a movie!", new_movie_path %></button>
     <hr>
+    <%= form_tag movies_path, :method => 'get' do %>
+      <%= label_tag(:q, "Search for: ") %><br/>
+      <%= label_tag(:q, "Movie Title: ") %> <%= text_field_tag :title %><br/>
+      <%= label_tag(:q, "Director: ") %> <%= text_field_tag :director %><br/>
+      <%= label_tag(:q, "Runtime: ") %>  <%= select_tag(:runtime_in_minutes, options_for_select([['Please select', 0],['Under 90 minutes', 1], ['Between 90 and 120 minutes', 2],['Over 120 minutes', 3]],0)) %><br/>
+          <%= submit_tag "Search", :name => nil %>
+    <% end %>
+    <hr>
+    Search Results:
     <% @movies.each do |movie| %>
       <div class="list-group">
         <%= link_to movie.title, movie_path(movie), class: "list-group-item active" %>
-      <span class="list-group-item"><%= link_to image_tag(movie.poster_image_url.url(:thumb).to_s), movie_path(movie) %></span>
-      <span class="list-group-item"><%= formatted_date(movie.release_date) %></span>
-      <span class="list-group-item">Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes</span>
-      <span class="list-group-item"><%= movie.description %></span>
+        <span class="list-group-item"><%= link_to image_tag(movie.poster_image_url.url(:thumb).to_s), movie_path(movie) %></span>
+        <span class="list-group-item"><%= formatted_date(movie.release_date) %></span>
+        <span class="list-group-item">Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes</span>
+        <span class="list-group-item"><%= movie.description %></span>
       </div>
     <% end %>
   </div>

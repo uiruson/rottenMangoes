@@ -42,6 +42,9 @@ gem 'autoprefixer-rails'
 gem 'simple_form'
 gem 'bootstrap_form'
 
+gem 'factory_girl'
+gem 'faker'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
