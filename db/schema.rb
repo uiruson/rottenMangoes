@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126225829) do
+ActiveRecord::Schema.define(version: 20141127010358) do
 
   create_table "movies", force: true do |t|
     t.string   "title"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20141126225829) do
     t.string   "firstname"
     t.string   "lastname"
     t.string   "avatar"
+    t.boolean  "admin",           default: false
   end
 
 end
