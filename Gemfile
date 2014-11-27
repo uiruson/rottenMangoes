@@ -34,6 +34,9 @@ gem 'rmagick'
 #upload image
 gem 'carrierwave'
 
+#pagination
+gem 'kaminari'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
