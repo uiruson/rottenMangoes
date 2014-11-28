@@ -17,7 +17,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_admin
-    # @current_admin ||= 
+    # if temporary_user
+    #   @current_user = User.find(temporary_user) if User.find(session[:user_id]).admin?
+    # @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   helper_method :current_user, :current_admin
