@@ -14,6 +14,12 @@ class SessionsController < ApplicationController
     end
   end
 
+  def set_impersonator(selected_user)
+    puts "----I AM IN----"
+    puts "selected_user = #{selected_user.firstname}"
+    session[:impersonated_user_id] = selected_user.id
+  end
+
   def destroy
     session[:user_id] = nil
     redirect_to movies_path, notice: "Adios!"

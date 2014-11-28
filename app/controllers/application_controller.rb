@@ -12,15 +12,33 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def restrcict_admin_access
+    if !current_user.admin?
+      flash[:alert] = "You are not allowed to access admin panel"
+      redirect_to movies_path
+    end
+  end
+
+  end
+
+  def impersonator
+    @impersonator_user ||= User.find(session[:impersonated_user_id]) if session[:impersonated_user_id]
+  end
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   def current_admin
-    # if temporary_user
-    #   @current_user = User.find(temporary_user) if User.find(session[:user_id]).admin?
-    # @current_user ||= User.find(session[:user_id]) if session[:user_id]
+     current_user.admin?
   end
 
-  helper_method :current_user, :current_admin
+  # def change_current_user(selected_user)
+  #   if current_user != selected_user
+  #     current_user = User.find_by(email: selected_user.email)
+  #     puts "selected_user's email = #{selected_user.email}"
+  #   end
+  # end
+
+  helper_method :current_user, :current_admin, :impersonator
 end

@@ -5,7 +5,6 @@
     
     <div class="panel panel-default panel-info">
       <div class="panel-heading">LIST OF ALL USERS</div>
-      
         <table class="table">
           <tr>
             <td><strong>Firstname</strong></td>
@@ -23,7 +22,10 @@
              <td><%= user.admin? %></td>
              <td>
               <%= link_to "Edit User",  edit_admin_user_path(user) %> |
-              <%= link_to "Delete User",  admin_user_path(user), method: :delete, confirm: "You sure?" %>
+              <%= link_to "Delete User",  admin_user_path(user), method: :delete, confirm: "You sure?" %> 
+              <% if !user.admin? %>
+                | <%= link_to "Switch to user", new_session_path, method: set_impersonator(user) %>
+              <% end %>
              </td>
           </tr>
         <% end %>
