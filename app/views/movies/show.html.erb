@@ -1,5 +1,10 @@
 <div class="container">
   <div class="row">
+    <% if current_user %>
+      <% if current_admin %>
+        <%= link_to "Back to Admin panel", admin_users_path %> | 
+      <% end %>
+    <% end %> 
     <%= link_to "Back to all movies" , movies_path %>
   
     <div class="panel panel-warning">
