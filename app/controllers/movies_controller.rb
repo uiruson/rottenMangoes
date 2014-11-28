@@ -2,14 +2,12 @@ class MoviesController < ApplicationController
 
   def index
     
-    if params[:title] && params[:director].empty? && params[:runtime_in_minutes] == "0"
-      @movies = Movie.search_movie_by_title(params[:title])
-    elsif params[:director] && params[:title].empty? && params[:runtime_in_minutes] == "0"
-      @movies = Movie.search_movie_by_director(params[:director])
-    elsif params[:runtime_in_minutes] && params[:title].empty? && params[:director].empty?
+    if params[:keyword] && params[:runtime_in_minutes] == "0"
+      @movies = Movie.search_movie_by_keyword(params[:keyword])
+    elsif params[:runtime_in_minutes] && params[:keyword].empty?
       @movies = Movie.search_movie_by_runtime(params[:runtime_in_minutes])
-    elsif params[:title] && params[:director] && params[:runtime_in_minutes]
-      @movies = Movie.search_movie_by_all_categories(params[:title],params[:director],params[:runtime_in_minutes])
+    elsif params[:keyword] && params[:runtime_in_minutes]
+      @movies = Movie.search_movie_by_all_categories(params[:keyword],params[:runtime_in_minutes])
     else
       @movies = Movie.all
     end

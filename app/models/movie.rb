@@ -13,7 +13,7 @@ class Movie < ActiveRecord::Base
 
   scope :search_movie_by_title, ->(title) {where('title like ?', "%#{title}%")}
   scope :search_movie_by_director, ->(director) {where('director like ?', "%#{director}%")}
-
+  scope :search_movie_by_keyword, ->(keyword) {where("title like '%#{keyword}%' OR director like '%#{keyword}%'")}
   scope :search_movie_by_runtime, ->(runtime) { where("runtime_in_minutes #{Movie.movie_by_runtime(runtime)}") }
   scope :search_movie_by_all_categories, ->(title,director,runtime) { where("title like '%#{title}%' AND director like '%#{director}%' AND runtime_in_minutes #{ Movie.movie_by_runtime(runtime) }") }
 
