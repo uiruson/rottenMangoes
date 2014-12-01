@@ -1,0 +1,43 @@
+ <% if current_user %>
+      <% if current_admin %>
+        <%= link_to "Back to Admin panel", admin_users_path %>
+      <% end %>
+    <% end %> <br/>
+    <% if impersonator %>
+       <strong>You're currently signed in as an impersonator of</strong> <%= impersonator.full_name %>
+    <% end %>
+
+
+<div class="panel panel-success">
+  <div class="panel-heading">Your Profile</div>
+   <div class="panel-body">
+    <table class="table">
+      <tr>
+        <td>Firstname</td>
+        <td><%= @user.firstname %></td>
+      </tr>
+      <tr>
+        <td>Lastname</td>
+        <td><%= @user.lastname %></td>
+      </tr> 
+      <tr>
+        <td>Email</td>
+        <td><%= @user.email %></td>
+      </tr>  
+      <tr>
+        <td>Movie Reviews</td>
+        <td>
+          <% if @user.reviews.any? %>
+            <% @user.reviews.each do |review| %>
+              <p><strong><%= review.movie.title %></strong><br/>
+              <%= review.text%></p>
+              <br/>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+ 

@@ -7,17 +7,12 @@ class SessionsController < ApplicationController
     
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+      session[:impersonated_user_id] = user.id if user.admin?
       redirect_to movies_path, notice: "Welcome back, #{user.firstname}"
     else
       flash.now[:alert] = "Log in failed..."
       render :new
     end
-  end
-
-  def set_impersonator(selected_user)
-    puts "----I AM IN----"
-    puts "selected_user = #{selected_user.firstname}"
-    session[:impersonated_user_id] = selected_user.id
   end
 
   def destroy

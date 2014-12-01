@@ -12,13 +12,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def restrcict_admin_access
-    if !current_user.admin?
+  def restrict_admin_access
+    if !session[:impersonated_user_id]
       flash[:alert] = "You are not allowed to access admin panel"
       redirect_to movies_path
     end
-  end
-
   end
 
   def impersonator

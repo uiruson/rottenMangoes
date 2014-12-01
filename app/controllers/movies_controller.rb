@@ -11,6 +11,8 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all
     end
+
+    @user = current_user
   end
 
   def show
