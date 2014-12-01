@@ -10,6 +10,10 @@ class Admin::UsersController < ApplicationController
     @admin_user = User.new
   end
 
+  def show
+    #important to set to integer to avoid malicious user's input that is non integer
+    @admin_users = User.find(params[:id].to_i)
+  end
 
   def create
     @admin_user = User.new(admin_user_params)
@@ -23,6 +27,11 @@ class Admin::UsersController < ApplicationController
 
   def edit
     @admin_user = User.find(params[:id])
+  end
+
+   def change_user
+    session[:user_id] = params[:id]
+    redirect_to movies_path
   end
 
   def update

@@ -1,15 +1,8 @@
 <div class="container">
   <div class="row">
-     <% if current_user %>
-      <% if current_admin %>
-        <%= link_to "Back to Admin panel", admin_users_path %>
-      <% end %>
-    <% end %> <br/>
-    <% if impersonator %>
-       <strong>You're currently signed in as an impersonator of</strong> <%= impersonator.full_name %>
-    <% end %>
     <h1>Rotten Mangoes</h1>
     <button type="button" class="btn btn-info"><%= link_to "Submit a movie!", new_movie_path %></button>
+    <button type="button" class="btn btn-info"><%= link_to "Your Profile", user_path(@user) %></button>
     <hr>
     <%= form_tag movies_path, :method => 'get' do %>
       <%= label_tag(:q, "Search for: ") %><br/>

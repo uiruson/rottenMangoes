@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :users
   resource :session, only: [:new, :create, :destroy]
 
+  get '/admin/change_users/:id', to: 'admin/users#change_user'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
